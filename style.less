@@ -1,0 +1,132 @@
+// Variáveis
+@cor-fundo: #f4f4f5;
+@cor-texto: #222;
+@cor-texto-secundario: #6b7280;
+@cor-borda: #ddd;
+@cor-destaque: #f5c518;
+@cor-destaque-fundo: #fffbea;
+@cor-primaria: #2563eb;
+@cor-primaria-hover: darken(@cor-primaria, 10%);
+
+@raio-borda: 8px;
+@espacamento: 8px;
+@sombra: 0 0 10px rgba(0, 0, 0, 0.1);
+@transicao: all 0.3s ease-in-out;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background-color: @cor-fundo;
+}
+
+// Bloco: lista/grid de produtos
+.produtos {
+    max-width: 900px;
+    width: 100%;
+    margin: 56px auto;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// Bloco: produto
+.produto {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: @espacamento * 2;
+    border: 1px solid @cor-borda;
+    border-radius: @raio-borda;
+    background-color: #fff;
+    box-shadow: @sombra;
+    transition: @transicao;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    // Elemento: imagem
+    &__imagem {
+        width: 100%;
+        border-radius: (@raio-borda - 2px);
+    }
+
+    // Elemento: nome
+    &__nome {
+        font-size: 1.2em;
+        margin: @espacamento 0;
+        color: @cor-texto;
+    }
+
+    // Elemento: descrição
+    &__descricao {
+        color: @cor-texto-secundario;
+        flex-grow: 1;
+    }
+
+    // Elemento: preço
+    &__preco {
+        display: block;
+        font-size: 1.3em;
+        font-weight: bold;
+        color: @cor-texto;
+        margin: @espacamento 0;
+    }
+
+    // Elemento: botão
+    &__botao {
+        border: none;
+        border-radius: @raio-borda;
+        padding: @espacamento (@espacamento * 2);
+        background-color: @cor-primaria;
+        color: #fff;
+        font-size: 1em;
+        cursor: pointer;
+        transition: @transicao;
+
+        &:hover {
+            background-color: @cor-primaria-hover;
+        }
+    }
+
+    // Elemento: selo
+    &__selo {
+        position: absolute;
+        top: -10px;
+        right: 12px;
+        background-color: @cor-destaque;
+        color: @cor-texto;
+        font-size: 0.75em;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 999px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    // Modificador: produto em destaque
+    &--em-destaque {
+        border: 2px solid @cor-destaque;
+        background-color: @cor-destaque-fundo;
+        box-shadow: 0 0 20px fade(@cor-destaque, 50%);
+
+        .produto__botao {
+            background-color: darken(@cor-destaque, 15%);
+
+            &:hover {
+                background-color: darken(@cor-destaque, 25%);
+            }
+        }
+    }
+}
